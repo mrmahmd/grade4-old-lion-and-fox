@@ -50,7 +50,7 @@ main section{padding-top:clamp(1rem,2.8vw,2.3rem)}
 .stationArt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 .stationArt:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--shade),transparent 24%);pointer-events:none}
 .card,.task,.scene,details{border-color:#d7e3db;box-shadow:0 7px 19px #23403a0e}.card h3,.task h3{color:var(--shade)}.card{border-bottom:4px solid var(--tint)}.task{border-top-color:var(--accent)}.stationControl{background:#f5f8f3}.stationControl .wrap{border-color:#d7e3db}.stationControl .advance{background:var(--accent);color:white}.stationControl .advance:hover{background:var(--shade)}
-.deckControl{border:1px solid #d7e3db;background:#fff;border-radius:1rem;padding:.5em;color:var(--shade)}.deckControl button{color:var(--shade)}.scene{border:2px solid var(--tint)}.scene img{object-position:center}
+.deckControl{border:1px solid #d7e3db;background:#fff;border-radius:1rem;padding:.5em;color:var(--shade)}.deckControl button{color:var(--shade)}.scene{border:2px solid var(--tint)}.scene img{height:auto;aspect-ratio:16 / 9;object-position:center}
 @media(max-width:680px){.hero{align-items:end;padding:1.4rem 0}.heroCopy{width:100%}.hero .cover img{object-position:72% center}.hero:after{background:linear-gradient(0deg,#091d1b 5%,#091d1bed 25%,#091d1b38 62%,transparent 82%)}.hero h1{font-size:clamp(2.75rem,10.5vw,4.5rem)}.routeMap a{justify-content:center;gap:.2em;padding:.32em .1em;text-align:center}.routeMap img{width:min(36px,85%);height:28px}.routeMap b{display:none}.stationBanner{grid-template-columns:1.1fr 1fr;min-height:150px}.stationIntro .tag{font-size:.55em}.stationIntro h2{font-size:clamp(1.65rem,6.8vw,2.5rem)}.stationArt:after{background:linear-gradient(90deg,var(--shade),transparent 18%)}}
 </style>
 </head><body>
@@ -74,11 +74,11 @@ const photos = {
  tracks: 'Animal footprints in sand'
 };
 const scenes = [
- ['An old lion has a problem','The old lion is too <strong>weak</strong> to <strong>hunt</strong>. He needs food, so he thinks of a <strong>trick</strong>.','lion'],
- ['A trick in the cave','He <strong>lay down</strong> in his <strong>cave</strong> and <strong>pretended</strong> to be very sick. He called the animals and asked them to visit him before he died.','cave'],
- ['The visitors do not return','The animals visited one by one. None came out. The lion caught and ate each visitor.','cave'],
- ['The fox spots a clue','A wise <strong>fox</strong> saw <strong>footprints</strong> going into the cave, but none coming out. He stayed at the entrance when the lion invited him inside.','tracks'],
- ['A safe escape','The fox told the lion what he had noticed. He learned from the other animals’ mistakes and ran away safely.','fox']
+ ['An old lion has a problem','The old lion is too <strong>weak</strong> to <strong>hunt</strong>. He needs food, so he thinks of a <strong>trick</strong>.','The tired old lion sits alone outside his cave'],
+ ['A trick in the cave','He <strong>lay down</strong> in his <strong>cave</strong> and <strong>pretended</strong> to be very sick. He called the animals and asked them to visit him before he died.','The lion lies at the entrance and pretends to be sick'],
+ ['The visitors do not return','The animals visited one by one. None came out. The lion caught and ate each visitor.','Woodland animals approach the cave in single file'],
+ ['The fox spots a clue','A wise <strong>fox</strong> saw <strong>footprints</strong> going into the cave, but none coming out. He stayed at the entrance when the lion invited him inside.','The fox examines the trail of pawprints going into the cave'],
+ ['A safe escape','The fox told the lion what he had noticed. He learned from the other animals’ mistakes and ran away safely.','The fox trots away toward a sunlit clearing']
 ];
 const words = [
  ['fox','A small, quick animal with red-brown fur and a fluffy tail.'],
@@ -115,8 +115,8 @@ function audioButton(text,label='Listen') {
 }
 let scene = 0;
 function renderScene() {
- const [title,body,key] = scenes[scene];
- $('scene').innerHTML = photo(key)+'<div><h3>'+title+'</h3><p>'+body+'</p>'+audioButton(title+'. '+strip(body),'Listen to scene')+'</div>';
+ const [title,body,alt] = scenes[scene];
+ $('scene').innerHTML = '<img width="1672" height="941" loading="lazy" src="art/scenes/scene-'+(scene+1)+'.jpg" alt="'+alt+'"><div><h3>'+title+'</h3><p>'+body+'</p>'+audioButton(title+'. '+strip(body),'Listen to scene')+'</div>';
  $('sceneCount').textContent = 'Scene '+(scene+1)+' of '+scenes.length;
  $('prev').disabled = scene === 0;
  $('next').disabled = scene === scenes.length-1;
